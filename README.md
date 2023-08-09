@@ -2,7 +2,7 @@
 
 This repository provides a recipe to integrate the Run 3 taggers using MiniAODv3 as inputs.
 
-Since NanoAODv11 (run on `12_6_X`) does not include the Run 3 taggers, this recipe runs on MiniAODv3 in `13_0_X` to have them included. It will mimic the condition in NanoAODv12.
+Since NanoAODv11 (run on `12_6_X` for MC and `12_4_X` for data) does not include the Run 3 taggers, this recipe runs on MiniAODv3 in `13_0_X` to have them included. It will mimic the condition in NanoAODv12.
 
 It does the following:
  - Re-run Puppi v17 on MiniAODv3, and recluster AK4 Puppi and AK8 jets. The recipe is sourced from [JME slides](https://indico.cern.ch/event/1263032/contributions/5450886/attachments/2671840/4631769/230622_Nurfikri_XPOGWorkshop_JME.pdf)
@@ -51,7 +51,7 @@ cmsDriver.py nano_data_2022CDE --data --eventcontent NANOAOD --datatier NANOAOD 
 cmsDriver.py nano_data_2022FG --data --eventcontent NANOAOD --datatier NANOAOD --step NANO \
 --conditions 124X_dataRun3_PromptAnalysis_v2   --era Run3,run3_nanoAOD_124 \
 --customise_commands="process.add_(cms.Service('InitRootHandlers', EnableIMT = cms.untracked.bool(False)));process.MessageLogger.cerr.FwkReport.reportEvery=1000;process.NANOAODoutput.fakeNameForCrab = cms.untracked.bool(True)" --nThreads 4 \
--n 20 --filein "/store/data/Run2022F/Muon/MINIAOD/PromptReco-v1/000/360/381/00000/0736ad9a-2b1d-4375-9493-9e7e01538978.root" --fileout file:nano_data2022FG.root \
+-n -1 --filein "/store/data/Run2022F/Muon/MINIAOD/PromptReco-v1/000/360/381/00000/0736ad9a-2b1d-4375-9493-9e7e01538978.root" --fileout file:nano_data2022FG.root \
 --customise="PhysicsTools/NanoRun3Utils/puppiJetMETReclustering_cff.nanoPuppiReclusterCustomize_Data" \
 --customise="PhysicsTools/NanoRun3Utils/addRun3Taggers_cff.nanoAddRun3TaggersCustomize_Data"  --no_exec
 ```
